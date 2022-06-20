@@ -21,35 +21,64 @@
 // THEN I exit the application, and the HTML is generated
 
 const fs = require('fs');
+const inquirer = require('inquirer');
 
 
 //  Emplyee questions array
 const questions = [
 
-{
-    type: 'input',
-    message: 'Please enter employee NAME?',
-    name: 'name',
-  },
-  {
-    type: 'input',
-    message: 'Please enter employee ID?',
-    name: 'id',
-  },
-  {
-    type: 'input',
-    message: 'Please enter employee EMAIL ADDRESS',
-    name: 'email',
-  },
-  {
-    type: 'input',
-    message: 'Please enter employee ',
-    name: 'github',
-  },
-  {
-    type: 'rawlist',
-    message: 'Please enter employee POSITION',
-    name: 'position',
-    choices: ['Manager', 'Engineer', 'Intern']
-  }
+    {
+        type: 'input',
+        message: 'Please enter employee NAME?',
+        name: 'name',
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Please enter a title to continue.')
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        message: 'Please enter employee ID?',
+        name: 'id',
+        validate: idInput => {
+            if (idInput) {
+                return true;
+            } else {
+                console.log('Please enter a title to continue.')
+                return false;
+            }
+        }
+    },
+    {
+        type: 'input',
+        message: 'Please enter employee EMAIL ADDRESS',
+        name: 'email',
+        validate: emailInput => {
+            if (emailInput) {
+                return true;
+            } else {
+                console.log('Please enter a title to continue.')
+                return false;
+            }
+        }
+    },
+    {
+        type: 'rawlist',
+        message: 'Please enter employee POSITION',
+        name: 'position',
+        choices: ['Manager', 'Engineer', 'Intern'],
+        validate: positionInput => {
+            if (positionInput) {
+                return true;
+            } else {
+                console.log('Please enter a title to continue.')
+                return false;
+            }
+        }
+    }
 ]
+
