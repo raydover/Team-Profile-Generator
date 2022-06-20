@@ -43,40 +43,40 @@ const questions = [
     },
     {
         type: 'input',
-        message: 'Please enter employee ID?',
+        message: 'Enter Employee ID?',
         name: 'id',
         validate: idInput => {
             if (idInput) {
                 return true;
             } else {
-                console.log('Please enter a title to continue.')
+                console.log('REQUIRED - Enter Employee ID to continue.')
                 return false;
             }
         }
     },
     {
         type: 'input',
-        message: 'Please enter employee EMAIL ADDRESS',
+        message: 'Enter Employee EMAIL ADDRESS:',
         name: 'email',
         validate: emailInput => {
             if (emailInput) {
                 return true;
             } else {
-                console.log('Please enter a title to continue.')
+                console.log('REQUIRED - Enter Employee EMAIL ADDRESS to continue.')
                 return false;
             }
         }
     },
     {
         type: 'rawlist',
-        message: 'Please enter employee POSITION',
+        message: 'Enter Employee POSITION',
         name: 'position',
         choices: ['Manager', 'Engineer', 'Intern'],
         validate: positionInput => {
             if (positionInput) {
                 return true;
             } else {
-                console.log('Please enter a title to continue.')
+                console.log('REQUIRED - Enter Employee POSITION to continue.')
                 return false;
             }
         }
@@ -87,13 +87,30 @@ const questions = [
 const managerQuestion = [
     {
         type: 'input',
-        message: 'Please enter Managers OFFICE NUMBER',
+        message: 'Enter Managers OFFICE NUMBER:',
         name: 'officeNumber',
         validate: officeNumberInput => {
             if (officeNumberInput) {
                 return true;
             } else {
-                console.log('Please enter a title to continue.')
+                console.log('Required -Enter a Manager OFFICE NUMER to Continue.')
+                return false;
+            }
+        }
+    }
+]
+
+// Enginner question GitHub username
+const engineerQuestion = [
+    {
+        type: 'input',
+        message: 'Enter Manager GitHub USERNAME:',
+        name: 'gitHub',
+        validate: gitHubInput => {
+            if (gitHubInput) {
+                return true;
+            } else {
+                console.log('REQUIRED - Enter a GitHub USERNAME to Continue.')
                 return false;
             }
         }
