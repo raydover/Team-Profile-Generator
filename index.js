@@ -24,7 +24,8 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 
 
-//  Emplyee questions array
+
+//  Emplyee questions array - name, id, email, position
 const questions = [
 
     {
@@ -73,6 +74,23 @@ const questions = [
         choices: ['Manager', 'Engineer', 'Intern'],
         validate: positionInput => {
             if (positionInput) {
+                return true;
+            } else {
+                console.log('Please enter a title to continue.')
+                return false;
+            }
+        }
+    }
+]
+
+// Manager question office number
+const managerQuestion = [
+    {
+        type: 'input',
+        message: 'Please enter Managers OFFICE NUMBER',
+        name: 'officeNumber',
+        validate: officeNumberInput => {
+            if (officeNumberInput) {
                 return true;
             } else {
                 console.log('Please enter a title to continue.')
