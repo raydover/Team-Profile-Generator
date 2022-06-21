@@ -23,11 +23,12 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
+const managerTest = require('./tests/Employee.test.js');
+
 
 
 //  Emplyee questions array - name, id, email, position
 const questions = [
-
     {
         type: 'input',
         message: 'Please enter employee NAME?',
@@ -36,7 +37,7 @@ const questions = [
             if (nameInput) {
                 return true;
             } else {
-                console.log('Please enter a title to continue.')
+                console.log('REQUIRED - Enter Employee NAME to continue...')
                 return false;
             }
         }
@@ -49,7 +50,7 @@ const questions = [
             if (idInput) {
                 return true;
             } else {
-                console.log('REQUIRED - Enter Employee ID to continue.')
+                console.log('REQUIRED - Enter Employee ID to continue...')
                 return false;
             }
         }
@@ -62,58 +63,119 @@ const questions = [
             if (emailInput) {
                 return true;
             } else {
-                console.log('REQUIRED - Enter Employee EMAIL ADDRESS to continue.')
+                console.log('REQUIRED - Enter Employee EMAIL ADDRESS to continue...')
                 return false;
             }
         }
     },
     {
         type: 'rawlist',
-        message: 'Enter Employee POSITION',
+        message: 'Enter Employee POSITION:',
         name: 'position',
         choices: ['Manager', 'Engineer', 'Intern'],
         validate: positionInput => {
             if (positionInput) {
                 return true;
             } else {
-                console.log('REQUIRED - Enter Employee POSITION to continue.')
+                console.log('REQUIRED - Enter Employee POSITION to continue...')
                 return false;
             }
         }
-    }
-]
+    },
+    // ]
 
-// Manager question office number
-const managerQuestion = [
+    // Manager question office number
+    // const managerQuestions = [
     {
         type: 'input',
         message: 'Enter Managers OFFICE NUMBER:',
         name: 'officeNumber',
+        when: (input) => input.position === 'Manager',
         validate: officeNumberInput => {
             if (officeNumberInput) {
                 return true;
             } else {
-                console.log('Required -Enter a Manager OFFICE NUMER to Continue.')
+                console.log('Required -Enter a Manager OFFICE NUMER to Continue...')
                 return false;
             }
         }
-    }
-]
+    },
+    // ]
 
-// Enginner question GitHub username
-const engineerQuestion = [
+
+    // Enginner question GitHub username
+    // const engineerQuestions = [
     {
         type: 'input',
         message: 'Enter Manager GitHub USERNAME:',
         name: 'gitHub',
+        when: (input) => input.position === 'Engineer',
         validate: gitHubInput => {
             if (gitHubInput) {
                 return true;
             } else {
-                console.log('REQUIRED - Enter a GitHub USERNAME to Continue.')
+                console.log('REQUIRED - Enter a GitHub USERNAME to Continue...')
+                return false;
+            }
+        }
+    },
+    // ]
+
+    // Intern question GitHub username
+    // const internQuestions = [
+    {
+        type: 'input',
+        message: 'Enter Intern School:',
+        name: 'school',
+        when: (input) => input.position === 'Intern',
+        validate: schoolInput => {
+            if (schoolInput) {
+                return true;
+            } else {
+                console.log('REQUIRED - Enter Intern School to Continue.')
                 return false;
             }
         }
     }
+    // ]
 ]
+
+// Function to initalize application
+function init() {
+
+}
+
+
+//  Prompt quesitons - manager, engineer and intern question
+inquirer.prompt(questions).then((answers) => {
+    console.log(answers);
+
+    // inquirer.prompt(managerQuestions).then((answers) => {
+    //     console.log(answers);
+
+    //     inquirer.prompt(engineerQuestions).then((answers) => {
+    //         console.log(answers);
+
+    //         inquirer.prompt(internQuestions).then((answers) => {
+    //             console.log(answers);
+
+
+    //         });
+    //     });
+    // });
+});
+
+// Function to write to the index.html file JSON string answers
+// fs.writeFile(
+//     './dist/index.html',
+//     JSON.stringify({answers}, null, 2), 
+//     (err) => {
+//     err ? console.error(err) : console.log('Success!');
+//     },
+// );
+
+
+// Function call to initialize application
+init();
+
 
