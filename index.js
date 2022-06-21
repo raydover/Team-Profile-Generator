@@ -23,7 +23,11 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
 
-const managerTest = require('./tests/Employee.test.js');
+// Require modules from local directory
+const Employee = require('./lib/Employee.js');
+const Manager = require('./lib/Manager.js');
+const Engineer = require('./lib/Engineer.js');
+const Intern = require('./lib/Intern.js');
 
 
 
@@ -85,7 +89,7 @@ const questions = [
     // ]
 
     // Manager question office number
-    // const managerQuestions = [
+    // const managerQuestion = [
     {
         type: 'input',
         message: 'Enter Managers OFFICE NUMBER:',
@@ -104,7 +108,7 @@ const questions = [
 
 
     // Enginner question GitHub username
-    // const engineerQuestions = [
+    // const engineerQuestion = [
     {
         type: 'input',
         message: 'Enter Manager GitHub USERNAME:',
@@ -121,8 +125,8 @@ const questions = [
     },
     // ]
 
-    // Intern question GitHub username
-    // const internQuestions = [
+    // Intern question inter school
+    // const internQuestion = [
     {
         type: 'input',
         message: 'Enter Intern School:',
@@ -136,9 +140,29 @@ const questions = [
                 return false;
             }
         }
+    },
+    // ]
+
+    // Employee question ADD
+    // const addEmployeeQuestion = [
+    {
+        type: 'rawlist',
+        message: 'Would you like to ADD Another EMPLOYEE?',
+        name: 'addEmployee',
+        choices: ['YES', 'NO'],
+        validate: addEmployeeInput => {
+            if (addEmployeeInput) {
+                return true;
+            } else {
+                console.log('REQUIRED - Enter YES or NO:')
+                return false;
+            }
+        }
     }
     // ]
 ]
+
+
 
 // Function to initalize application
 function init() {
@@ -146,33 +170,35 @@ function init() {
 }
 
 
+
 //  Prompt quesitons - manager, engineer and intern question
 inquirer.prompt(questions).then((answers) => {
     console.log(answers);
 
-    // inquirer.prompt(managerQuestions).then((answers) => {
-    //     console.log(answers);
+    //  inquirer.prompt(managerQuestions).then((answers) => {
+    //      console.log(answers);
 
-    //     inquirer.prompt(engineerQuestions).then((answers) => {
-    //         console.log(answers);
+    //  inquirer.prompt(engineerQuestions).then((answers) => {
+    //      console.log(answers);
 
-    //         inquirer.prompt(internQuestions).then((answers) => {
-    //             console.log(answers);
+    //  inquirer.prompt(internQuestions).then((answers) => {
+    //      console.log(answers);
+    //  });
+    //  });
+    //  });
+})
 
 
-    //         });
-    //     });
-    // });
-});
 
-// Function to write to the index.html file JSON string answers
-// fs.writeFile(
-//     './dist/index.html',
-//     JSON.stringify({answers}, null, 2), 
-//     (err) => {
-//     err ? console.error(err) : console.log('Success!');
-//     },
-// );
+// Function to write to the index.html file
+fs.writeFile(
+    './dist/index.html',
+    JSON.stringify({ questions: 'answers' }, null, 2),
+    (err) => {
+        err ? console.error(err) : console.log('Success!');
+    },
+);
+
 
 
 // Function call to initialize application
