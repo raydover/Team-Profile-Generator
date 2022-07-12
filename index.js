@@ -52,7 +52,7 @@ const questions = () => {
             {
                 type: 'input',
                 name: 'managerName',
-                message: 'Please enter Manager Name?',
+                message: 'Please enter Manages Name?',
                 validate: managerNameInput => {
                     if (managerNameInput) {
                         return true;
@@ -77,13 +77,13 @@ const questions = () => {
             },
             {
                 type: 'input',
-                name: 'managerEmailNumber',
-                message: 'Enter Managers Email Number:',
-                validate: ManagerEmailNumberInput => {
-                    if (ManagerEmailNumberInput) {
+                name: 'managerEmail',
+                message: 'Enter Manager Email:',
+                validate: ManagerEmailInput => {
+                    if (ManagerEmailInput) {
                         return true;
                     } else {
-                        console.log('Required - Enter Manager Email Number to Continue...')
+                        console.log('Required - Enter Manager Email to Continue...')
                         return false;
                     }
                 }
@@ -91,7 +91,7 @@ const questions = () => {
             {
                 type: 'input',
                 name: 'managerOfficeNumber',
-                message: 'Enter Managers Office Number:',
+                message: 'Enter Manager Office Number:',
                 validate: ManagerOfficeNumberInput => {
                     if (ManagerOfficeNumberInput) {
                         return true;
