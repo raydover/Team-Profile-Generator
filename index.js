@@ -24,10 +24,26 @@ const fs = require('fs');
 const inquirer = require('inquirer');
 
 // Require modules from local directory
-const Employee = require('./lib/Employee.js');
-const Engineer = require('./lib/Engineer.js');
-const Intern = require('./lib/Intern.js');
 const Manager = require('./lib/Manager.js');
+const Employee = require('./lib/Employee.js');
+const Intern = require('./lib/Intern.js');
+const Engineer = require('./lib/Engineer.js');
+
+
+let employees = [];
+
+const Employee = {
+    Manager: "Manager",
+    Intern: "Intern",
+    Engineer: "Engineer",
+}
+
+// Function to write to the index.html file
+// function writeToFile(fileName, data) {
+//     fs.writeFile(fileName, data, (err) => {
+//         err ? console.error(`Error Message: ${err}`) : console.log("Success!");
+//     });
+// }
 
 //  Emplyee questions array - name, id, email, position
 const questions = () => {
@@ -54,15 +70,60 @@ const questions = () => {
                     if (managerIdInput) {
                         return true;
                     } else {
-                        console.log('REQUIRED - Enter Employee ID to continue...')
+                        console.log('REQUIRED - Enter Manager ID to continue...')
                         return false;
                     }
                 }
             },
             {
                 type: 'input',
-                message: 'Please enter employee NAME?',
-                name: 'name',
+                name: 'managerEmailNumber',
+                message: 'Enter Managers Email Number:',
+                validate: ManagerEmailNumberInput => {
+                    if (ManagerEmailNumberInput) {
+                        return true;
+                    } else {
+                        console.log('Required - Enter Manager Email Number to Continue...')
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'managerOfficeNumber',
+                message: 'Enter Managers Office Number:',
+                validate: ManagerOfficeNumberInput => {
+                    if (ManagerOfficeNumberInput) {
+                        return true;
+                    } else {
+                        console.log('Required - Enter Manager Office Number to Continue...')
+                        return false;
+                    }
+                }
+            },
+        ])
+        .then((answers)) => {
+    const manager = new Manager(
+        answers.managerName,
+        answers.managerId,
+        answers.managerEmail,
+        answers.ManagerOfficeNumber
+    );
+    employees.push(manager);
+    repeatQuestions();
+});
+};
+
+const repeatQuestions = () => {
+    inquirer
+        .prompt([
+            
+        ])
+
+{
+    type: 'input',
+        message: 'Please enter employee NAME?',
+            name: 'name',
                 validate: nameInput => {
                     if (nameInput) {
                         return true;
@@ -71,11 +132,11 @@ const questions = () => {
                         return false;
                     }
                 }
-            },
-            {
-                type: 'input',
-                message: 'Enter Employee ID?',
-                name: 'id',
+},
+{
+    type: 'input',
+        message: 'Enter Employee ID?',
+            name: 'id',
                 validate: idInput => {
                     if (idInput) {
                         return true;
@@ -84,11 +145,11 @@ const questions = () => {
                         return false;
                     }
                 }
-            },
-            {
-                type: 'input',
-                message: 'Enter Employee EMAIL ADDRESS:',
-                name: 'email',
+},
+{
+    type: 'input',
+        message: 'Enter Employee EMAIL ADDRESS:',
+            name: 'email',
                 validate: emailInput => {
                     if (emailInput) {
                         return true;
@@ -97,111 +158,99 @@ const questions = () => {
                         return false;
                     }
                 }
-            },
-            {
-                type: 'rawlist',
-                message: 'Enter Employee POSITION:',
-                name: 'position',
+},
+{
+    type: 'rawlist',
+        message: 'Enter Employee POSITION:',
+            name: 'position',
                 choices: ['Manager', 'Engineer', 'Intern'],
-                validate: positionInput => {
-                    if (positionInput) {
-                        return true;
-                    } else {
-                        console.log('REQUIRED - Enter Employee POSITION to continue...')
-                        return false;
+                    validate: positionInput => {
+                        if (positionInput) {
+                            return true;
+                        } else {
+                            console.log('REQUIRED - Enter Employee POSITION to continue...')
+                            return false;
+                        }
                     }
-                }
-            },
-            // ]
+},
+// ]
 
-            // Manager question office number
-            // const managerQuestion = [
-            {
-                type: 'input',
-                message: 'Enter Managers OFFICE NUMBER:',
-                name: 'officeNumber',
+// Manager question office number
+// const managerQuestion = [
+{
+    type: 'input',
+        message: 'Enter Managers OFFICE NUMBER:',
+            name: 'officeNumber',
                 when: (input) => input.position === 'Manager',
-                validate: officeNumberInput => {
-                    if (officeNumberInput) {
-                        return true;
-                    } else {
-                        console.log('Required -Enter a Manager OFFICE NUMER to Continue...')
-                        return false;
+                    validate: officeNumberInput => {
+                        if (officeNumberInput) {
+                            return true;
+                        } else {
+                            console.log('Required -Enter a Manager OFFICE NUMER to Continue...')
+                            return false;
+                        }
                     }
-                }
-            },
-            // ]
+},
+// ]
 
-            // Enginner question GitHub username
-            // const engineerQuestion = [
-            {
-                type: 'input',
-                message: 'Enter Manager GitHub USERNAME:',
-                name: 'gitHub',
+// Enginner question GitHub username
+// const engineerQuestion = [
+{
+    type: 'input',
+        message: 'Enter Manager GitHub USERNAME:',
+            name: 'gitHub',
                 when: (input) => input.position === 'Engineer',
-                validate: gitHubInput => {
-                    if (gitHubInput) {
-                        return true;
-                    } else {
-                        console.log('REQUIRED - Enter a GitHub USERNAME to Continue...')
-                        return false;
+                    validate: gitHubInput => {
+                        if (gitHubInput) {
+                            return true;
+                        } else {
+                            console.log('REQUIRED - Enter a GitHub USERNAME to Continue...')
+                            return false;
+                        }
                     }
-                }
-            },
-            // ]
+},
+// ]
 
-            // Intern question inter school
-            // const internQuestion = [
-            {
-                type: 'input',
-                message: 'Enter Intern School:',
-                name: 'school',
+// Intern question inter school
+// const internQuestion = [
+{
+    type: 'input',
+        message: 'Enter Intern School:',
+            name: 'school',
                 when: (input) => input.position === 'Intern',
-                validate: schoolInput => {
-                    if (schoolInput) {
-                        return true;
-                    } else {
-                        console.log('REQUIRED - Enter Intern School to Continue.')
-                        return false;
+                    validate: schoolInput => {
+                        if (schoolInput) {
+                            return true;
+                        } else {
+                            console.log('REQUIRED - Enter Intern School to Continue.')
+                            return false;
+                        }
                     }
-                }
-            },
-            // ]
+},
+// ]
 
-            // Employee question ADD
-            // const addEmployeeQuestion = [
-            {
-                type: 'rawlist',
-                message: 'Would you like to ADD Another EMPLOYEE?',
-                name: 'addEmployee',
+// Employee question ADD
+// const addEmployeeQuestion = [
+{
+    type: 'rawlist',
+        message: 'Would you like to ADD Another EMPLOYEE?',
+            name: 'addEmployee',
                 choices: ['YES', 'NO'],
-                validate: addEmployeeInput => {
-                    if (addEmployeeInput) {
-                        return true;
-                    } else {
-                        console.log('REQUIRED - Enter YES or NO:')
-                        return false;
+                    validate: addEmployeeInput => {
+                        if (addEmployeeInput) {
+                            return true;
+                        } else {
+                            console.log('REQUIRED - Enter YES or NO:')
+                            return false;
+                        }
                     }
-                }
-            }
-            // ]
-        ]
-
-//  Prompt quesitons - manager, engineer and intern question
-inquirer.prompt(questions).then((answers) => {
-            // Function to write to the index.html file
-            fs.writeFile(
-                './dist/index.html',
-                JSON.stringify({ questions: 'answers' }, null, 2),
-                (err) => {
-                    err ? console.error(err) : console.log('Success!');
-                },
-            );
-            console.log(answers);
-
-        });
+}
 
 
+// Initializes application
+function init() {
+    questions();
+}
 
-
-
+// Invoke init funciton to begin questions
+init();
