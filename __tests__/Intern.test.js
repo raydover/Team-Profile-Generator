@@ -1,5 +1,5 @@
 // Required Package
-const { Intern } = require('../lib/Intern');
+const Intern = require('../lib/Intern');
 
 // Sets up test create new intern
 test('This test will Create a New Intern', () => {

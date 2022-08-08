@@ -1,5 +1,5 @@
 // Required Package
-const { Manager } = require('../lib/Manager');
+const Manager = require('../lib/Manager');
 
 // Sets up test create new manager
 test('This test will Create a New Manager', () => {

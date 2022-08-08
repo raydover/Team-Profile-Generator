@@ -1,5 +1,5 @@
 // Required Package
-const { Engineer } = require('../lib/Engineer');
+const Engineer = require('../lib/Engineer');
 
 // Sets up test create new engineer
 test('This test will Create a New Engineer', () => {
