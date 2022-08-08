@@ -225,31 +225,51 @@ ask(addManager);
 // Function cycle questions add anothe employee
 function ask(questionArray) {
     inquirer
-    .prompt(questionArray)
-    .then((teamMember) => {
-        employees.push(teamMember);
+        .prompt(questionArray)
+        .then((teamMember) => {
+            employees.push(teamMember);
 
-        if (teamMember.addAnotherEmployee === 'Add Enginner' {
-            ask(addEngineer);
-        } else if (teamMember.addAnotherEmployee ==='Add Intern') {
-            ask(addIntern);
-        } else {
-            createteamProfile(teamMember);
-        }   
+            if (teamMember.addAnotherEmployee === 'Add Enginner') {
+                ask(addEngineer);
+            } else if (teamMember.addAnotherEmployee === 'Add Intern') {
+                ask(addIntern);
+            } else {
+                createTeamProfiles(teamMember);
+            }
         })
         .catch((err) => console.log(err));
-    }
+}
 
+function createTeamProfiles(teamMember) {
+    const teamProfiles = team.map((teamMember) => {
+        const { name, id, email } = teamMember;
 
+        if (teamMember.hasOwnProperty('officeNumber')) {
+            const { officeNumber } = teamMember;
+            return new Manager (name, id, email, officeNumber);
+        }
+
+        if (teamMember.hasOwnProperty('gitHub')) {
+            const { gitHub } = teamMember;
+            return new Engineer (name, id, email, gitHub);
+        }
+
+        if (teamMember.hasOwnProperty('school')) {
+            const { school } = teamMember;
+            return new Intern (name, id, email, school);
+        }
+    })
+
+}
 
 
 
 // Function to write to the index.html file
 function writeHtml(newHtml) {
     fs.writeFile('./dist/index.html', newHtml, (err) => {
-      if (err) throw err;
-      console.log('Team Profile Successfully Generated!');
+        if (err) throw err;
+        console.log('Team Profile Successfully Generated!');
     });
-  };
+};
 
 
