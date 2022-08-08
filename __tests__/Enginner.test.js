@@ -1,9 +1,9 @@
 // Required Package
-const Engineer = require('../lib/Engineer');
+const { Engineer } = require('../lib/Engineer');
 
 // Sets up test create new engineer
 test('This test will Create a New Engineer', () => {
-    const Engineer = new Engineer('Aden Dover', 2, 'aden@gmail.com', 'aden-dover');
+    const employee = new Engineer('Aden Dover', 2, 'aden@gmail.com', 'aden-dover');
 
     expect(employee.name).toBe('Aden Dover');
     expect(employee.id).toEqula(expect.any(Number));

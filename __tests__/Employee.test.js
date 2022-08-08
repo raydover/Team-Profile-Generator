@@ -3,7 +3,7 @@ const Employee = require('../lib/Employee');
 
 // Sets up test create new employee
 test('This test will Create a New Employee', () => {
-    const Employee = new Employee('Aden Dover', 2, 'aden@gmail.com');
+    const employee = new Employee('Aden Dover', 2, 'aden@gmail.com');
 
     expect(employee.name).toBe('Aden Dover');
     expect(employee.id).toEqula(expect.any(Number));
