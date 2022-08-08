@@ -11,30 +11,33 @@
 
 ## Decription
 
-The assignement requires students to create a simple calnder application  that allows users to save events for each hour of the day by modifying given starter code. Students will utilize Moment.js library to work with date and time.
+The assignement requires students to create a Node.js command-line application that takes in information about employees on a software engineering team and generates an HTML webpage that displays summaries for each person. Because testing is key to making code maintainable, studants must also write unit tests for each part of your code and ensure that it passes all of them.
 
 ## Resources
 
 -[Repository](https://github.com/raydover/team-profile-generator)
 
--[Video Link](https://(INSERT LINK HERE))
+-[Video Link](https://drive.google.com/file/d/1PSI5xMBjCKSoSVwfuLBvkbW1_fwZ9wmN/view)
 
 ## Visuals
 
-![Team Profile Generator](./(INSERT FILE HERE)).png)
+![Team Profile Generator](./assets/team-profile-generator-terminal.png)
 
 ## Installation
 
+```
 - node i inquirer
 - node i fs
 - node i jest 
+```
 
 ## Usage
 
 To launch this application:
 
+```
 - node index.js
-
+```
 
 ## Author and Acknowledgements
 
