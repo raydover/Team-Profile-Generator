@@ -8,9 +8,9 @@ const Intern = require('./lib/Intern.js');
 const Engineer = require('./lib/Engineer.js');
 
 // Import HTML templates
-const managerCard = require('./src/cardManager');
-const engineerCard = require('./src/cardEngineer');
-const internCard = require('./src/cardIntern');
+const cardManager = require('./src/cardManager');
+const cardEngineer = require('./src/cardEngineer');
+const cardIntern = require('./src/cardIntern');
 const cardWrapper = require('./src/cardWrapper');
 
 let teamProfile = [];
@@ -272,15 +272,15 @@ function createTeamProfiles(teamProfile) {
 
 function generateHtml(employeeProfiles) {
     let teamProfileCards = '';
-    employeeProfiles.forEach((profile) => {
-        if (profile instanceof Manager) {
-            const card = managerCard(profile);
+    employeeProfiles.forEach((employeeProfile) => {
+        if (employeeProfile instanceof Manager) {
+            const card = cardManager(employeeProfile);
             teamProfileCards += card;
-        } else if (profile instanceof Engineer) {
-            const card = engineerCard(profile);
+        } else if (employeeProfile instanceof Engineer) {
+            const card = cardEngineer(employeeProfile);
             teamProfileCards += card;
-        } else if (profile instanceof Intern) {
-            const card = internCard(profile);
+        } else if (employeeProfile instanceof Intern) {
+            const card = cardIntern(employeeProfile);
             teamProfileCards += card;
         }
     })
