@@ -5,7 +5,9 @@
 1. [Description](#description)
 2. [Resources](#resources)
 3. [Visuals](#visuals)
-4. [Author and Acknowledgements](#author-and-acknowledgements)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Author and Acknowledgements](#author-and-acknowledgements)
 
 ## Decription
 
@@ -21,6 +23,19 @@ The assignement requires students to create a simple calnder application  that a
 
 ![Team Profile Generator](./(INSERT FILE HERE)).png)
 
+## Installation
+
+- node i inquirer
+- node i fs
+- node i jest 
+
+## Usage
+
+To launch this application:
+
+- node index.js
+
+
 ## Author and Acknowledgements
 
-code created by UNCC Bootcamp Student, Raymond Dover
+code created by UNCC Bootcamp Coders, edited by Student Raymond Dover
