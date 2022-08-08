@@ -7,7 +7,13 @@ const Employee = require('./lib/Employee.js');
 const Intern = require('./lib/Intern.js');
 const Engineer = require('./lib/Engineer.js');
 
-let employees = [];
+// Import HTML templates
+const managerCard = require('./src/cardManager');
+const engineerCard = require('./src/cardEngineer');
+const internCard = require('./src/cardIntern');
+const cardWrapper = require('./src/cardWrapper');
+
+let teamProfile = [];
 
 //  Add manager questions array - name, id, email, office number
 const addManager = [
@@ -227,40 +233,63 @@ function ask(questionArray) {
     inquirer
         .prompt(questionArray)
         .then((teamMember) => {
-            employees.push(teamMember);
+            teamProfile.push(teamMember);
 
-            if (teamMember.addAnotherEmployee === 'Add Enginner') {
+            if (teamMember.addAnotherEmployee === 'Add Engineer') {
                 ask(addEngineer);
             } else if (teamMember.addAnotherEmployee === 'Add Intern') {
                 ask(addIntern);
             } else {
-                createTeamProfiles(teamMember);
+                createTeamProfiles(teamProfile);
             }
         })
         .catch((err) => console.log(err));
 }
 
-function createTeamProfiles(teamMember) {
-    const teamProfiles = team.map((teamMember) => {
+// Function create team profile, if add manager ask office number, if add enginner ask gitHub, if add intern ask school
+function createTeamProfiles(teamProfile) {
+    const employeeProfiles = teamProfile.map((teamMember) => {
         const { name, id, email } = teamMember;
 
         if (teamMember.hasOwnProperty('officeNumber')) {
             const { officeNumber } = teamMember;
-            return new Manager (name, id, email, officeNumber);
+            return new Manager(name, id, email, officeNumber);
         }
 
         if (teamMember.hasOwnProperty('gitHub')) {
             const { gitHub } = teamMember;
-            return new Engineer (name, id, email, gitHub);
+            return new Engineer(name, id, email, gitHub);
         }
 
         if (teamMember.hasOwnProperty('school')) {
             const { school } = teamMember;
-            return new Intern (name, id, email, school);
+            return new Intern(name, id, email, school);
+        }
+    });
+    generateHTML(employeeProfiles);
+}
+
+
+function generateHtml(employeeProfiles) {
+    let teamProfileCards = '';
+    employeeProfiles.forEach((profile) => {
+        if (profile instanceof Manager) {
+            const card = managerCard(profile);
+            teamProfileCards += card;
+        } else if (profile instanceof Engineer) {
+            const card = engineerCard(profile);
+            teamProfileCards += card;
+        } else if (profile instanceof Intern) {
+            const card = internCard(profile);
+            teamProfileCards += card;
         }
     })
 
-}
+
+    const newHtml = cardWrapper(teamProfileCards);
+
+    writeHtml(newHtml);
+};
 
 
 
