@@ -13,8 +13,6 @@ The assignement requires students to create a simple calnder application  that a
 
 ## Resources
 
--[LIVE SITE](https://raydover.github.io/team-profile-generator/)
-
 -[Repository](https://github.com/raydover/team-profile-generator)
 
 -[Video Link](https://(INSERT LINK HERE))
